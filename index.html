@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+  
+    <title>Restaurant</title>
+    <style>
+        #image-slider {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            overflow: hidden;
+        }
+    
+        #image-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: fadeInOut 3s ease-in-out infinite alternate;
+        }
+    
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<style>
+
+  
+    .background-animate {
+      background-size: 400%;
+  
+      -webkit-animation: AnimationName 3s ease infinite;
+      -moz-animation: AnimationName 3s ease infinite;
+      animation: AnimationName 3s ease infinite;
+    }
+  
+    @keyframes AnimationName {
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+  </style>
+<body class="flex h-screen min-w-full bg-cover  bg-gradient-to-r
+from-pink-500
+via-red-500
+to-yellow-500
+background-animate">
+    <!-- Hamburger Menu Icon -->
+    <div class="md:hidden">
+        <button class="text-gray-800 p-4 focus:outline-none " >
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </div>
+    <!--end of the hamburger icon section-->
+    <!--- the following section is for the navbar-->
+    <div class="hidden h-screen flex-col md:flex bg-gray-800 fixed rounded-3xl">
+        <nav class="p-7 m-4 space-y-8">
+            <div class="text-white font-bold text-2xl">          
+                
+                Flavor Voyage</div>
+            <div class="flex flex-col mt-4 justify-between space-y-8">
+                <a href="#menu-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
+                    onclick="toggleSection('menu-section')">Menu</a>
+                <a href="#about-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
+                    onclick="toggleSection('about-section')">About</a>
+                <a href="#reservations-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
+                    onclick="toggleSection('reservations-section')">Reservations</a>
+                <a href="#gallery-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
+                    onclick="toggleSection('gallery-section')">Gallery</a>
+                <a href="#catering-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
+                    onclick="toggleSection('catering-section')">Catering</a>
+                <a href="#private-events-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
+                    onclick="toggleSection('private-events-section')">Private Events</a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="flex justify-center w-full">
+        <!-- Sections -->
+        <div id="menu-section" class="section text-center m-5">
+            <!-- Navbar for Menu Section -->
+            <div class="justify-center items-center w-auto md:ml-64 hidden sm:flex">
+                <nav class="bg-gray-800 p-4 rounded-3xl items-center">
+                    <a href="#drinks"
+                        class="text-gray-200 hover:text-gray-400 px-4 py-2 rounded transition duration-300"
+                        onclick="toggleSection1('drinks')">Drinks</a>
+                    <a href="#dishes"
+                        class="text-gray-200 hover:text-gray-400 px-4 py-2 rounded transition duration-300"
+                        onclick="toggleSection1('dishes')">Dishes</a>
+                    <a href="#desserts"
+                        class="text-gray-200 hover:text-gray-400 px-4 py-2 rounded transition duration-300"
+                        onclick="toggleSection1('desserts')">Desserts</a>
+                    <a href="#alcohol"
+                        class="text-gray-200 hover:text-gray-400 px-4 py-2 rounded transition duration-300"
+                        onclick="toggleSection1('alcohol')">Alcohol</a>
+                </nav>
+            </div>
+
+                <!-- Reservations Section -->
+                <div id="reservations-section" class="flex section text-center md:ml-64 mr-20 hidden">
+                    <div class="max-w-2xl mx-auto">
+                        <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">Reservations</div>
+
+                        <p class="text-gray-700 mb-8">
+                            Make your dining experience with Flavor Voyage even more special by securing your reservations in advance. Whether you're planning an intimate dinner for two, a family celebration, or a gathering with friends, we're here to ensure that your time with us is seamless and enjoyable.
+                        </p>
+
+                        <!-- Reservation Form -->
+                        <form class="border rounded-md p-6 mb-8 shadow-md">
+                            <label for="reservation-date" class="block text-gray-700 text-sm font-bold mb-2">Date:</label>
+                            <input type="date" id="reservation-date" name="reservation_date" class="border rounded-md p-2 mb-4 w-full" required>
+
+                            <label for="reservation-time" class="block text-gray-700 text-sm font-bold mb-2">Time:</label>
+                            <input type="time" id="reservation-time" name="reservation_time" class="border rounded-md p-2 mb-4 w-full" required>
+
+                            <label for="party-size" class="block text-gray-700 text-sm font-bold mb-2">Number of Persons:</label>
+                            <input type="number" id="party-size" name="party_size" class="border rounded-md p-2 mb-4 w-full" min="1" required>
+
+                            <label for="phone-number" class="block text-gray-700 text-sm font-bold mb-2">Phone Number:</label>
+                            <input type="tel" id="phone-number" name="phone_number" class="border rounded-md p-2 mb-4 w-full" placeholder="Enter your phone number" required>
+
+                            <button type="submit" class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition duration-300">Make Reservation</button>
+                        </form>
+
+                        <p class="text-gray-700 mb-8">
+                            To make a reservation, simply choose your preferred date, time, and the number of persons using the form above. Our team will confirm your reservation shortly, and we look forward to hosting you for a delightful dining experience.
+                        </p>
+                    </div>
+                </div>
+               <!-- Gallery Section -->
+                <div id="gallery-section" class="flex section text-center md:ml-64 mr-20 hidden">
+                    <div class="max-w-3xl mx-auto">
+                        <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">Gallery</div>
+
+                        <!-- Image Gallery -->
+                        <div class=" flex justify-center relative overflow-hidden">
+                            <div id="image-slider" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <!-- Add your gallery images here with appropriate Tailwind styling -->
+                                <img src="images/resturant/image1.avif" alt="Gallery Image 1" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
+                                <img src="images/resturant/image2.avif" alt="Gallery Image 2" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
+                                <img src="images/resturant/image3.avif" alt="Gallery Image 3" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
+                                <img src="images/resturant/image4.avif" alt="Gallery Image 4" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
+                                <img src="images/resturant/image5.avif" alt="Gallery Image 5" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
+                                <img src="images/resturant/image6.avif" alt="Gallery Image 6" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
+                                <img src="images/resturant/image7.avif" alt="Gallery Image 7" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
+                                <!-- Add more images as needed -->
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catering Section -->
+                <!-- Catering Section -->
+                <div id="catering-section" class="flex section text-center md:ml-64 mr-20 hidden">
+                    <div class="max-w-3xl mx-auto">
+                        <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">Catering</div>
+
+                        <p class="text-gray-700 mb-8">
+                            Elevate your events with our catering services. Whether it's a corporate gathering, wedding, or any special occasion, Flavor Voyage is here to provide a culinary experience your guests won't forget.
+                        </p>
+
+                        <!-- Catering Packages -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                            <!-- Catering Package 1 -->
+                            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 p-8 transform hover:scale-105 transition-transform duration-300">
+                                <img src="images/catering/image1.jpeg" alt="Catering Package 1" class="mb-4 rounded-md">
+                                <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Essential Package</h5>
+                                <p class="mb-6 font-normal text-gray-700 dark:text-gray-400">Perfect for small gatherings. Includes a selection of our signature dishes.</p>
+                                <button class="bg-blue-500 text-white rounded-md py-2 px-4">Learn More</button>
+                            </div>
+
+                            <!-- Catering Package 2 -->
+                            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 p-8 transform hover:scale-105 transition-transform duration-300">
+                                <img src="images/catering/image2.jpeg" alt="Catering Package 2" class="mb-4 rounded-md">
+                                <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Premium Package</h5>
+                                <p class="mb-6 font-normal text-gray-700 dark:text-gray-400">Ideal for larger events. A curated menu featuring our chef's specialties.</p>
+                                <button class="bg-blue-500 text-white rounded-md py-2 px-4">Learn More</button>
+                            </div>
+
+                            <!-- Catering Package 3 -->
+                            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 p-8 transform hover:scale-105 transition-transform duration-300">
+                                <img src="images/catering/image3.jpeg" alt="Catering Package 3" class="mb-4 rounded-md">
+                                <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Customized Package</h5>
+                                <p class="mb-6 font-normal text-gray-700 dark:text-gray-400">Tailored to your specific preferences and event requirements.</p>
+                                <button class="bg-blue-500 text-white rounded-md py-2 px-4">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Private Events Section -->
+                <div id="private-events-section" class="flex justify-center section text-center md:ml-64 mr-40 hidden">
+                    <div class="max-w-3xl mx-auto">
+                        <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">Private Events</div>
+
+                        <p class="text-gray-700 mb-8">
+                            Host your special moments with us! Flavor Voyage offers a unique and elegant setting for private events. Whether it's a birthday celebration, anniversary, or corporate gathering, our team is dedicated to making your event memorable.
+                        </p>
+
+                        <!-- Private Events Form -->
+                        <form class="border rounded-md p-6">
+                            <label for="event-date" class="block text-gray-700 text-sm font-bold mb-2">Event Date:</label>
+                            <input type="date" id="event-date" name="event_date" class="border rounded-md p-2 mb-4" required>
+
+                            <label for="event-time" class="block text-gray-700 text-sm font-bold mb-2">Event Time:</label>
+                            <input type="time" id="event-time" name="event_time" class="border rounded-md p-2 mb-4" required>
+
+                            <label for="event-type" class="block text-gray-700 text-sm font-bold mb-2">Event Type:</label>
+                            <select id="event-type" name="event_type" class="border rounded-md p-2 mb-4" required>
+                                <option value="birthday">Birthday</option>
+                                <option value="anniversary">Anniversary</option>
+                                <option value="corporate">Corporate Event</option>
+                                <!-- Add more options as needed -->
+                            </select>
+
+                            <label for="guest-count" class="block text-gray-700 text-sm font-bold mb-2">Number of Guests:</label>
+                            <input type="number" id="guest-count" name="guest_count" class="border rounded-md p-2 mb-4" min="1" required>
+
+                            <label for="contact-number" class="block text-gray-700 text-sm font-bold mb-2">Contact Number:</label>
+                            <input type="tel" id="contact-number" name="contact_number" class="border rounded-md p-2 mb-4" pattern="[0-9]{10}" required>
+                            <br>
+                            <button type="submit" class="bg-blue-500 text-white rounded-md py-2 px-4" onclick="">Submit Request</button>
+                        </form>
+
+                        <p class="text-gray-700 mb-8">
+                            For inquiries about hosting private events or customizing your experience, feel free to reach out to our events team. We look forward to creating unforgettable moments with you.
+                        </p>
+                    </div>
+                </div>
+                
+ 
+
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+    const imageSlider = document.getElementById('image-slider');
+    const images = [
+        'images/resturant/image1.avif',
+        'images/resturant/image2.avif',
+        'images/resturant/image3.avif',
+        'images/resturant/image4.avif',
+        'images/resturant/image5.avif',
+        'images/resturant/image6.avif',
+        'images/resturant/image7.avif',
+        // Add more image URLs as needed
+    ];
+    let currentImageIndex = 0;
+
+    function changeImage() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        const newImage = new Image();
+        newImage.src = images[currentImageIndex];
+        newImage.alt = 'Gallery Image';
+        newImage.className = 'rounded-md cursor-pointer transition duration-300 transform hover:scale-105';
+        
+        // Replace the existing image with the new one
+        imageSlider.innerHTML = '';
+        imageSlider.appendChild(newImage);
+    }
+
+    // Change image every 5 seconds
+    setInterval(changeImage, 5000);
+});
+        function toggleSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the selected section
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.remove('hidden');
+        }
+        function toggleSection1(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.part');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the selected section
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.remove('hidden');
+        }
+    </script>
+    
+</body>
+
+</html>
