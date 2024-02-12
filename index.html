@@ -5,56 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-  
-    <title>Restaurant</title>
-    <style>
-        #image-slider {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 70vh;
-            overflow: hidden;
-        }
-    
-        #image-slider img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            animation: fadeInOut 3s ease-in-out infinite alternate;
-        }
-    
-        @keyframes fadeInOut {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
-</head>
-<style>
+    <link rel="stylesheet" href="styles.css">
 
-  
-    .background-animate {
-      background-size: 400%;
-  
-      -webkit-animation: AnimationName 3s ease infinite;
-      -moz-animation: AnimationName 3s ease infinite;
-      animation: AnimationName 3s ease infinite;
-    }
-  
-    @keyframes AnimationName {
-      0%,
-      100% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-    }
-  </style>
+    <title>Restaurant</title>
+    
+</head>
+
 <body class="flex h-screen min-w-full bg-cover ">
     <!-- Hamburger Menu Icon -->
     <div class="md:hidden">
@@ -305,18 +261,7 @@
                         We are proud to be an active part of our community, engaging in local initiatives, supporting local businesses, and participating in events that bring people together. Our journey is made richer by the relationships we build, and we look forward to sharing our love for food and hospitality with you.
                     </p>
 
-                    <style>
-                        /* Define the fade-in animation */
-                        @keyframes fade-in {
-                            from { opacity: 0; }
-                            to { opacity: 1; }
-                        }
-
-                        /* Apply the fade-in animation to the image */
-                        .animate-fade-in {
-                            animation: fade-in 1.5s ease-in-out;
-                        }
-                    </style>
+          
                 </div>
             </div>
                 <!-- Reservations Section -->
@@ -457,59 +402,7 @@
 
     </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-    const imageSlider = document.getElementById('image-slider');
-    const images = [
-        'images/resturant/image1.avif',
-        'images/resturant/image2.avif',
-        'images/resturant/image3.avif',
-        'images/resturant/image4.avif',
-        'images/resturant/image5.avif',
-        'images/resturant/image6.avif',
-        'images/resturant/image7.avif',
-        // Add more image URLs as needed
-    ];
-    let currentImageIndex = 0;
-
-    function changeImage() {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        const newImage = new Image();
-        newImage.src = images[currentImageIndex];
-        newImage.alt = 'Gallery Image';
-        newImage.className = 'rounded-md cursor-pointer transition duration-300 transform hover:scale-105';
-        
-        // Replace the existing image with the new one
-        imageSlider.innerHTML = '';
-        imageSlider.appendChild(newImage);
-    }
-
-    // Change image every 5 seconds
-    setInterval(changeImage, 5000);
-});
-        function toggleSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.classList.add('hidden');
-            });
-
-            // Show the selected section
-            const selectedSection = document.getElementById(sectionId);
-            selectedSection.classList.remove('hidden');
-        }
-        function toggleSection1(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.part');
-            sections.forEach(section => {
-                section.classList.add('hidden');
-            });
-
-            // Show the selected section
-            const selectedSection = document.getElementById(sectionId);
-            selectedSection.classList.remove('hidden');
-        }
-    </script>
+    
     <!-- special scripts for integration in App Gallery - must be placed at the bottom of the HTML after your code -->
 <script>
     // custom config for the MTW app 
@@ -537,7 +430,7 @@
 
 </script>
 <script src="https://morethanwallet.com/appstore/index.js"></script>
-
+<script src="index.js" defer></script>
 </body>
 
 </html>
