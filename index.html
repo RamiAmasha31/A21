@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
   
     <title>Restaurant</title>
     <style>
@@ -238,12 +238,87 @@
                 </div>
 
             </div>
+            <div class="flex flex-col items-center m-10 sm:pl-1 md:pl-64 part hidden" id="alcohol">
+                <div class="section-title text-2xl font-bold mb-4 text-gray-800">Alcohol</div>
 
+                <!-- First row of cards -->
+                <div class="flex flex-wrap justify-center">
+
+                    <div
+                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
+                        <div class="flex items-center justify-center">
+                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
+                        </div>
+                        <div class="p-5">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
+                                technology acquisitions 2021</h5>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
+                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
+                        <div class="flex items-center justify-center">
+                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
+                        </div>
+                        <div class="p-5">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
+                                technology acquisitions 2021</h5>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
+                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-
-        <!-- ALCOHOL Section -->
         <!-- About Section -->
+                    <!-- About Section -->
+            <div id="about-section" class="flex section text-center md:ml-64 mr-20 hidden">
+                <div class="max-w-2xl mx-auto">
+                    <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">About Us</div>
+                    
+                    <!-- Image or Animation -->
+                    <div class="mb-8">
+                        <img src="images/image.jpg" alt="About Us Image" class="w-full h-auto rounded-lg shadow-md animate-fade-in" />
+                    </div>
 
+                    <p class="text-gray-700 mb-8">
+                        Welcome to Flavor Voyage – a culinary journey like no other. At Flavor Voyage, we believe in creating memorable dining experiences that go beyond just great food. Our passion for culinary excellence, combined with a warm and inviting atmosphere, sets us apart.
+                    </p>
+
+                    <p class="text-gray-700 mb-8">
+                        Established in [year], Flavor Voyage has been delighting diners with a diverse menu inspired by global flavors. Our chefs, each with their unique specializations, meticulously source the finest ingredients to craft dishes that not only satisfy your taste buds but also tell a story.
+                    </p>
+
+                    <p class="text-gray-700 mb-8">
+                        Our mission is simple – to provide an unparalleled culinary experience that combines creativity, quality, and a touch of adventure. From signature dishes that have become customer favorites to our commitment to using locally sourced and sustainable ingredients, every aspect of our menu reflects our dedication to excellence.
+                    </p>
+
+                    <p class="text-gray-700 mb-8">
+                        Flavor Voyage is not just a restaurant; it's a celebration of culinary artistry. Whether you're here for a casual lunch, a romantic dinner, or a joyous celebration with friends and family, we strive to make each moment special. Our restaurant is more than a place to dine; it's a destination where each dish is a passport to a world of culinary delights.
+                    </p>
+
+                    <p class="text-gray-700 mb-8">
+                        We are proud to be an active part of our community, engaging in local initiatives, supporting local businesses, and participating in events that bring people together. Our journey is made richer by the relationships we build, and we look forward to sharing our love for food and hospitality with you.
+                    </p>
+
+                    <style>
+                        /* Define the fade-in animation */
+                        @keyframes fade-in {
+                            from { opacity: 0; }
+                            to { opacity: 1; }
+                        }
+
+                        /* Apply the fade-in animation to the image */
+                        .animate-fade-in {
+                            animation: fade-in 1.5s ease-in-out;
+                        }
+                    </style>
+                </div>
+            </div>
                 <!-- Reservations Section -->
                 <div id="reservations-section" class="flex section text-center md:ml-64 mr-20 hidden">
                     <div class="max-w-2xl mx-auto">
@@ -435,7 +510,34 @@
             selectedSection.classList.remove('hidden');
         }
     </script>
-    
+    <!-- special scripts for integration in App Gallery - must be placed at the bottom of the HTML after your code -->
+<script>
+    // custom config for the MTW app 
+    const mtwAppConfig = {
+        border: true // app border in the MTW page                    
+    }
+
+    ///////////////////////////////////////////////////////
+    // implement this functions in order to use private API        
+    const sendPrivateApiRequest = async () => {
+        // your code here:
+        // sendRequestToParent({ cat: 'getAssets' })
+    }        
+
+    const acceptPrivateApiResponse = async (data) => {
+        // process received data here:
+        // console.log(data)
+    }
+
+    // use this in order to send on document load
+    document.addEventListener('DOMContentLoaded', () => {
+        // your code here:
+        //sendRequestToParent({ method: 'getAssets' })
+    })
+
+</script>
+<script src="https://morethanwallet.com/appstore/index.js"></script>
+
 </body>
 
 </html>
