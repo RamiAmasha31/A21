@@ -3,7 +3,7 @@ export const dishesData = [
       "title": "Filet Mignon",
       "description": "A tender and lean cut of beef often grilled or pan-seared and served with various sauces.",
       "price": 55,
-      "imgSrc": "https://scontent.ftlv1-1.fna.fbcdn.net/v/t39.30808-6/275192130_1014177602506921_4183310487061422317_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=ZfmBUexbcnoAX_-FN6R&_nc_ht=scontent.ftlv1-1.fna&oh=00_AfABbK2Xm9DQYmfVX2bfWCSO6EpZdCU_AaX5SoUksuhuHg&oe=65E56882"
+      "imgSrc": "https://hips.hearstapps.com/hmg-prod/images/singleimagebug-filet-mignon-1541189248.jpg?crop=0.901xw:0.568xh;0.0986xw,0.213xh&resize=980:*"
     },
     {
       "title": "Steak au Poivre",

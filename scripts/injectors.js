@@ -113,133 +113,139 @@ function showCustomAlert(message) {
   // Call this function instead of alert()
   
 
-function injectReservationForm(reservationsData){
-        // Create and inject elements into the reservations section
-        const reservationsSection = document.getElementById('reservations-section');
+
+
+  function injectReservationForm(reservationsData) {
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyA_vgsCXmhHRpEOw3b0ZlU_-7kf2WD8fo4",
+        authDomain: "web-resturant.firebaseapp.com",
+        projectId: "web-resturant",
+        storageBucket: "web-resturant.appspot.com",
+        messagingSenderId: "857014383573",
+        appId: "1:857014383573:web:d6809f5df62142a485435c",
+        measurementId: "G-KVZGFTTNB3"
+      };
     
-        const title = document.createElement('h2');
-        title.className = 'text-3xl font-bold mb-4 text-center';
-        title.textContent = reservationsData.title;
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
     
-        const description = document.createElement('p');
-        description.className = 'text-gray-700 mb-4';
-        description.textContent = reservationsData.description;
-    
-        const form = document.createElement('form');
-        form.className = 'max-w-md mx-auto border rounded-md p-6 mb-8 shadow-md text-center';
-    
-        Object.entries(reservationsData.formLabels).forEach(([key, value]) => {
-            const label = document.createElement('label');
-            label.for = `reservation-${key}`;
-            label.className = 'block text-gray-700 text-sm font-bold mb-2';
-            label.textContent = value;
-    
-            const input = document.createElement('input');
-            input.type = key === 'date' ? 'date' : key === 'time' ? 'time' : key === 'partySize' ? 'number' : 'tel';
-            input.id = `reservation-${key}`;
-            input.name = `reservation_${key}`;
-            input.className = 'border rounded-md p-2 mb-4 w-full';
-            input.required = true;
-            if (key === 'partySize') {
-                input.min = 1;
-            }
-            if (key === 'phoneNumber') {
-                input.placeholder = 'Enter your phone number';
-            }
-    
-            form.appendChild(label);
-            form.appendChild(input);
+      // Access Firestore using firebase.firestore()
+      var db = firebase.firestore();
+    // Create and inject elements into the reservations section
+    const reservationsSection = document.getElementById('reservations-section');
+
+    const title = document.createElement('h2');
+    title.className = 'text-3xl font-bold mb-4 text-center';
+    title.textContent = reservationsData.title;
+
+    const description = document.createElement('p');
+    description.className = 'text-gray-700 mb-4';
+    description.textContent = reservationsData.description;
+
+    const form = document.createElement('form');
+    form.className = 'max-w-md mx-auto border rounded-md p-6 mb-8 shadow-md text-center';
+
+    Object.entries(reservationsData.formLabels).forEach(([key, value]) => {
+        const label = document.createElement('label');
+        label.for = `reservation-${key}`;
+        label.className = 'block text-gray-700 text-sm font-bold mb-2';
+        label.textContent = value;
+
+        const input = document.createElement('input');
+        input.type = key === 'date' ? 'date' : key === 'time' ? 'time' : key === 'partySize' ? 'number' : 'tel';
+        input.id = `reservation-${key}`;
+        input.name = `reservation_${key}`;
+        input.className = 'border rounded-md p-2 mb-4 w-full';
+        input.required = true;
+        if (key === 'partySize') {
+            input.min = 1;
+        }
+        if (key === 'phoneNumber') {
+            input.placeholder = 'Enter your phone number';
+        }
+
+        form.appendChild(label);
+        form.appendChild(input);
+    });
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.className = 'bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition duration-300';
+    submitButton.textContent = reservationsData.buttonText;
+    submitButton.disabled = true; // Initially, disable the button
+
+    // Function to check if all required fields are filled
+    function checkFormValidity() {
+        const isValid = Array.from(form.elements).every(element => {
+            return element.tagName !== 'INPUT' || (element.required && element.value.trim() !== '');
         });
-    
-        const submitButton = document.createElement('button');
-        submitButton.type = 'submit';
-        submitButton.className = 'bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition duration-300';
-        submitButton.textContent = reservationsData.buttonText;
-                    submitButton.disabled = true; // Initially, disable the button
 
-                // Function to check if all required fields are filled
-                function checkFormValidity() {
-                    const isValid = Array.from(form.elements).every(element => {
-                        return element.tagName !== 'INPUT' || (element.required && element.value.trim() !== '');
-                    });
+        submitButton.disabled = !isValid;
+    }
 
-                    submitButton.disabled = !isValid;
-                }
+    // Add an event listener to each input field for change events
+    Array.from(form.elements).forEach(element => {
+        if (element.tagName === 'INPUT') {
+            element.addEventListener('input', checkFormValidity);
+        }
+    });
 
-                // Add an event listener to each input field for change events
-                Array.from(form.elements).forEach(element => {
-                    if (element.tagName === 'INPUT') {
-                        element.addEventListener('input', checkFormValidity);
-                    }
+    // Add an event listener to the form
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // Create a JSON object to store the form data
+        const formData = {};
+
+        // Iterate over form elements and add them to the formData object
+        Array.from(form.elements).forEach(element => {
+            if (element.tagName === 'INPUT') {
+                formData[element.name] = element.value;
+            }
+        });
+
+        // Display the JSON data in the console (you can modify this part)
+        console.log('Form Data as JSON:', JSON.stringify(formData, null, 2));
+
+        try {
+            // Access Firestore collection named 'reservations'
+            var reservationsCollection = db.collection('reservations');
+
+            // Check if the form data already exists in the Firestore collection
+            var checkSnapshot = await reservationsCollection.where('data', '==', formData).get();
+
+            if (!checkSnapshot.empty) {
+                showCustomAlert('Sorry! we dont have empty place at this specifec time.');
+            } else {
+                // Add the form data to the Firestore collection
+                await reservationsCollection.add({
+                    data: formData,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp() // Include a timestamp
                 });
 
-                // Add an event listener to the form
-                form.addEventListener('submit', async function (event) {
-                    event.preventDefault(); // Prevent the default form submission behavior
+                showCustomAlert('Reservation confirmed!');
+                // You can handle form submission or any other actions
 
-                    // Create a JSON object to store the form data
-                    const formData = {};
+                // Reset the form after successful submission
+                form.reset();
+            }
+        } catch (error) {
+            console.error('Error handling Firestore:', error);
+        }
+    });
 
-                    // Iterate over form elements and add them to the formData object
-                    Array.from(form.elements).forEach(element => {
-                        if (element.tagName === 'INPUT') {
-                            formData[element.name] = element.value;
-                        }
-                    });
+    form.appendChild(submitButton);
 
-                                                    // Display the JSON data in the console (you can modify this part)
-                                console.log('Form Data as JSON:', JSON.stringify(formData, null, 2));
-                                // Fetch the reservations.json file
-                                try {
-                                    // Fetch the existing data from localStorage
-                                    const storedData = localStorage.getItem('reservationsData');
-                                    const jsonFile = storedData ? JSON.parse(storedData) : [];
-                                
-                                    // Check if the form data matches any entry in the JSON file
-                                    if (isFormDataInJsonFile(formData, jsonFile)) {
-                                       // alert('Form data already exists in the reservations.json file!');
-                                        showCustomAlert('Form data already exists in the reservations.json file!');
-                                    } else {
-                                        // Add the form data to the JSON file
-                                        jsonFile.push(formData);
-                                
-                                        // Save the updated data back to localStorage
-                                        localStorage.setItem('reservationsData', JSON.stringify(jsonFile));
-                                
-                                        showCustomAlert('Form data added to the reservations.json file!');
-                                        
-                                        // You can handle form submission or any other actions
-                                    }
-                                } catch (error) {
-                                    console.error('Error fetching or updating reservations.json:', error);
-                                }
-                                form.reset();
-                                                        // Function to check if form data exists in the JSON file
-                                                        function isFormDataInJsonFile(formData, jsonFile) {
-                                                            return jsonFile.some(entry => JSON.stringify(entry) === JSON.stringify(formData));
-                                                        }
+    const confirmationMessage = document.createElement('p');
+    confirmationMessage.className = 'text-gray-700 mb-8';
+    confirmationMessage.textContent = reservationsData.confirmationMessage;
 
-
-                    // You can now send the formData to your server or perform other actions
-                });
-
-        form.appendChild(submitButton);
-    
-        const confirmationMessage = document.createElement('p');
-        confirmationMessage.className = 'text-gray-700 mb-8';
-        confirmationMessage.textContent = reservationsData.confirmationMessage;
-    
-        reservationsSection.appendChild(title);
-        reservationsSection.appendChild(description);
-        reservationsSection.appendChild(form);
-        reservationsSection.appendChild(confirmationMessage);
-
-            
-
+    reservationsSection.appendChild(title);
+    reservationsSection.appendChild(description);
+    reservationsSection.appendChild(form);
+    reservationsSection.appendChild(confirmationMessage);
 }
-
-
-
 
 
 
@@ -319,7 +325,27 @@ function injectCaering(cateringData){
     cateringSection.appendChild(cateringPackagesContainer);
 }
 function injectPrivateEvents(privateEventsData) {
+    var firebaseConfig = {
+        apiKey: "AIzaSyA_vgsCXmhHRpEOw3b0ZlU_-7kf2WD8fo4",
+        authDomain: "web-resturant.firebaseapp.com",
+        projectId: "web-resturant",
+        storageBucket: "web-resturant.appspot.com",
+        messagingSenderId: "857014383573",
+        appId: "1:857014383573:web:d6809f5df62142a485435c",
+        measurementId: "G-KVZGFTTNB3"
+    };
 
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Access Firestore using firebase.firestore()
+    var db = firebase.firestore();
+
+    // Function to check if all required fields are filled
+    function areRequiredFieldsFilled() {
+        const requiredFields = form.querySelectorAll('[required]');
+        return Array.from(requiredFields).every(field => field.value.trim() !== '');
+    }
 
     // Create and inject elements into the private events section
     const privateEventsSection = document.getElementById('private-events-section');
@@ -366,10 +392,8 @@ function injectPrivateEvents(privateEventsData) {
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
     submitButton.className = 'bg-blue-500 text-white rounded-md py-2 px-4';
-        submitButton.textContent = 'Submit Request';
- // Initially, disable the submit button
- submitButton.disabled = true;
-
+    submitButton.textContent = 'Submit Request';
+    submitButton.disabled = true;
 
     // Add an event listener to the form
     form.addEventListener('input', function () {
@@ -377,70 +401,46 @@ function injectPrivateEvents(privateEventsData) {
         submitButton.disabled = !areRequiredFieldsFilled();
     });
 
+    // Add an event listener to the form
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
 
-// Add an event listener to the form
-form.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+        // Collect all form field values
+        const formData = {};
+        const formElements = form.elements;
 
-    // Collect all form field values
-    const formData = {};
-    const formElements = form.elements;
-
-    for (let i = 0; i < formElements.length; i++) {
-        const element = formElements[i];
-        if (element.tagName !== 'BUTTON') {
-            formData[element.name] = element.value;
+        for (let i = 0; i < formElements.length; i++) {
+            const element = formElements[i];
+            if (element.tagName !== 'BUTTON') {
+                formData[element.name] = element.value;
+            }
         }
-    }
 
-    // Convert the form data to JSON
-    const formDataJSON = JSON.stringify(formData);
+        try {
+            // Access Firestore collection named 'privateEvents'
+            var privateEventsCollection = db.collection('privateEvents');
 
-    // Log the JSON data (you can modify this part based on your needs)
-    console.log('Form Data JSON:', formDataJSON);
+            // Check if the form data already exists in the Firestore collection
+            var checkSnapshot = await privateEventsCollection.where('data', '==', formData).get();
 
-    try {
-        // Fetch the existing data from localStorage
-        const storedData = localStorage.getItem('privateEventsData');
-        const jsonFile = storedData ? JSON.parse(storedData) : [];
+            if (!checkSnapshot.empty) {
+                showCustomAlert('Sorry! We dont have empty places for this event.');
+            } else {
+                // Add the form data to the Firestore collection
+                await privateEventsCollection.add({
+                    data: formData,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
 
-        // Check if the form data matches any entry in the JSON file
-        if (isFormDataInJsonFile(formData, jsonFile)) {
-            showCustomAlert('Form data already exists in the privateEvents.json file!');
-            // You can handle it as needed, e.g., show a message or prevent submission
-        } else {
-            // Add the form data to the JSON file
-            jsonFile.push(formData);
+                showCustomAlert('Your event has been confirmed!');
+                
 
-            // Save the updated data back to localStorage
-            localStorage.setItem('PrivateEventData', JSON.stringify(jsonFile));
-
-            showCustomAlert('Form data added to the privateEvents.json file!');
-            // You can handle form submission or any other actions
-
-            // Reset the form after successful submission
-            form.reset();
+                // Reset the form after successful submission
+                form.reset();
+            }
+        } catch (error) {
+            console.error('Error handling Firestore:', error);
         }
-    } catch (error) {
-        console.error('Error fetching or updating reservations.json:', error);
-    }
-
-    // Function to check if form data exists in the JSON file
-    function isFormDataInJsonFile(formData, jsonFile) {
-        return jsonFile.some(entry => JSON.stringify(entry) === JSON.stringify(formData));
-    }
-
-
-
-
-
-
-
-
-
-
-
-
     });
 
     form.appendChild(submitButton);
@@ -452,13 +452,8 @@ form.addEventListener('submit', function (event) {
     inquiryMessage.textContent = "For inquiries about hosting private events or customizing your experience, feel free to reach out to our events team. We look forward to creating unforgettable moments with you.";
 
     privateEventsSection.appendChild(inquiryMessage);
-       // Function to check if all required fields are filled
-       function areRequiredFieldsFilled() {
-        const requiredFields = form.querySelectorAll('[required]');
-        return Array.from(requiredFields).every(field => field.value.trim() !== '');
-    }
 }
- 
+
 
 // Helper function to create a label
 function createLabel(forAttribute, text) {
