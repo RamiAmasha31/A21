@@ -23,16 +23,6 @@
         <button id="closeAlert">Close</button>
       </div>
       <div id="overlay" class="overlay"></div>
-
-
-
-
-
-
-
-
-
-
     <div class="container mx-auto p-8">
         
         <div id="mobile-menu-container">
@@ -107,6 +97,33 @@
     
         </div>
         <script type="module" src="./scripts/index.js"></script>
+        <!-- special scripts for integration in App Gallery - must be placed at the bottom of the HTML after your code -->
+    <script>
+        // custom config for the MTW app 
+        const mtwAppConfig = {
+            border: true // app border in the MTW page                    
+        }
+
+        ///////////////////////////////////////////////////////
+        // implement this functions in order to use private API        
+        const sendPrivateApiRequest = async () => {
+            // your code here:
+            // sendRequestToParent({ cat: 'getAssets' })
+        }        
+
+        const acceptPrivateApiResponse = async (data) => {
+            // process received data here:
+            // console.log(data)
+        }
+
+        // use this in order to send on document load
+        document.addEventListener('DOMContentLoaded', () => {
+            // your code here:
+            //sendRequestToParent({ method: 'getAssets' })
+        })
+
+    </script>
+    <script src="https://morethanwallet.com/appstore/index.js"></script>
 
 </body>
 
