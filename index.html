@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,432 +6,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
-
-    <title>Restaurant</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="styles/styles.css">
     
+    <title>Flavor Voyage</title>
+
 </head>
 
-<body class="flex h-screen min-w-full bg-cover ">
-    <!-- Hamburger Menu Icon -->
-    <div class="md:hidden">
-        <button class="text-gray-800 p-4 focus:outline-none " >
-            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
-    </div>
-    <!--end of the hamburger icon section-->
-    <!--- the following section is for the navbar-->
-    <div class="hidden h-screen flex-col md:flex bg-gray-800 fixed rounded-3xl">
-        <nav class="p-7 m-4 space-y-8">
-            <div class="text-white font-bold text-2xl">          
-                
-                Flavor Voyage</div>
-            <div class="flex flex-col mt-4 justify-between space-y-8">
-                <a href="#menu-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
-                    onclick="toggleSection('menu-section')">Menu</a>
-                <a href="#about-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
-                    onclick="toggleSection('about-section')">About</a>
-                <a href="#reservations-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
-                    onclick="toggleSection('reservations-section')">Reservations</a>
-                <a href="#gallery-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
-                    onclick="toggleSection('gallery-section')">Gallery</a>
-                <a href="#catering-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
-                    onclick="toggleSection('catering-section')">Catering</a>
-                <a href="#private-events-section" class="text-gray-200 hover:text-gray-400 transition duration-300"
-                    onclick="toggleSection('private-events-section')">Private Events</a>
+
+<body class="bg-gray-100">
+    <div id="customAlert" class="modal">
+        <p>Your custom alert message goes here!</p>
+        <button id="closeAlert">Close</button>
+      </div>
+      <div id="overlay" class="overlay"></div>
+
+
+
+
+
+
+
+
+
+
+    <div class="container mx-auto p-8">
+        
+        <div id="mobile-menu-container">
+
+            <button  id="close-btn" class="text-white text-3xl absolute top-4 right-4">&times;</button>
+
+            <span class="text-2xl font-bold text-white">Flavor Voyage</span>
+            <a href="#hero-section" class="hover:text-gray-300  ">Home</a>
+            <a href="#menu-section" class="hover:text-gray-300 try ">Menu</a>
+            <a href="#drinks_menu_item"  class="text-gray-300 hidden menu_item ">Drinks</a>
+            <a href="#dishes_menu_item"  class="text-gray-300 hidden menu_item ">Dishes</a>
+            <a href="#alcohol_menu_item"  class="text-gray-300 hidden menu_item ">Alcohol</a>
+            <a href="#about-section" class="hover:text-gray-300  ">About</a>
+            <a href="#reservations-section" class="hover:text-gray-300  ">Reservations</a>
+            <a href="#gallery-section" class="hover:text-gray-300  ">Gallery</a>
+            <a href="#catering-section" class="hover:text-gray-300  ">Catering</a>
+            <a href="#private-events-section" class="hover:text-gray-300  ">Private Events</a>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="bg-gray-800 text-white p-4 rounded-lg">
+            <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold">Flavor Voyage</span>
+                <!-- Responsive Navigation Menu -->
+                <div class="space-x-4 md:hidden">
+                    <button  id="mobile-menu-button"  class="text-gray-300 hover:text-gray-400 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Hidden Navigation Items on Small Screens -->
+                <div id="mobile-menu" class="hidden md:flex space-x-4 section   ">
+                    <a href="#hero-section" class="hover:text-gray-300  ">Home</a>
+                    <a href="#menu-section" class="hover:text-gray-300 try ">Menu
+                        <div id="dropaNav" class="dropdown-content transform -translate-x-5 ">
+                            <div class="clickable-div " data-section="#drinks_menu_item">Drinks</div>
+                            <div class="clickable-div " data-section="#dishes_menu_item">Dishes</div>
+                            <div class="clickable-div " data-section="#alcohol_menu_item">Alcohol</div>
+                        </div>
+                    </a>
+                    <a href="#about-section" class="hover:text-gray-300  ">About</a>
+                    <a href="#reservations-section" class="hover:text-gray-300  ">Reservations</a>
+                    <a href="#gallery-section" class="hover:text-gray-300  ">Gallery</a>
+                    <a href="#catering-section" class="hover:text-gray-300  ">Catering</a>
+                    <a href="#private-events-section" class="hover:text-gray-300  ">Private Events</a>
+                </div>
             </div>
         </nav>
-    </div>
+           
+            <section id="hero-section" class="mt-8 section"></section>
+            <section id="menu-section" class="mt-8 text-center hidden-section section">
+                   
+                    <div id="dishes_menu_item" class="hidden-section"></div>
+                    <div id="drinks_menu_item" class="hidden-section"></div>
+                    <div id="alcohol_menu_item" class="hidden-section"></div>
+            </section>
 
-    <div class="flex justify-center w-full">
-        <!-- Sections -->
-        <div id="menu-section" class="section text-center m-5">
-            <!-- Navbar for Menu Section -->
-            <div class="justify-center items-center w-auto md:ml-64 hidden sm:flex">
-                <nav class="bg-gray-800 p-4 rounded-3xl items-center">
-                    <a href="#drinks"
-                        class="text-gray-200 hover:text-gray-400 px-4 py-2 rounded transition duration-300"
-                        onclick="toggleSection1('drinks')">Drinks</a>
-                    <a href="#dishes"
-                        class="text-gray-200 hover:text-gray-400 px-4 py-2 rounded transition duration-300"
-                        onclick="toggleSection1('dishes')">Dishes</a>
-                    <a href="#desserts"
-                        class="text-gray-200 hover:text-gray-400 px-4 py-2 rounded transition duration-300"
-                        onclick="toggleSection1('desserts')">Desserts</a>
-                    <a href="#alcohol"
-                        class="text-gray-200 hover:text-gray-400 px-4 py-2 rounded transition duration-300"
-                        onclick="toggleSection1('alcohol')">Alcohol</a>
-                </nav>
-            </div>
-            <div class="flex flex-col items-center m-10 sm:pl-1 md:pl-64 part" id="drinks">
-                <div class="section-title text-2xl font-bold mb-4 text-gray-800">Drinks</div>
-                
-                <!-- First row of cards -->
-                <div class="flex flex-wrap justify-center">
+            <section id="about-section" class="mt-8 text-center hidden-section section"></section>
 
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
+            <section id="reservations-section" class="mt-8 text-center hidden-section section"></section>
 
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
+            <section id="gallery-section" class="mt-8 justify-center items-center text-center hidden-section section"></section>
 
-                </div>
+            <section id="catering-section" class="mt-8 text-center hidden-section section"></section>
 
-            </div>
-            <div class="flex flex-col items-center m-10 sm:pl-1 md:pl-64 part hidden" id="dishes">
-                <div class="section-title text-2xl font-bold mb-4 text-gray-800">Dishes</div>
+            <section id="private-events-section" class="mt-8 text-center hidden-section section"></section>
 
-                <!-- First row of cards -->
-                <div class="flex flex-wrap justify-center">
-
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
-
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="flex flex-col items-center m-10 sm:pl-1 md:pl-64 part hidden" id="desserts">
-                <div class="section-title text-2xl font-bold mb-4 text-gray-800">Desserts</div>
-
-                <!-- First row of cards -->
-                <div class="flex flex-wrap justify-center">
-
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="flex flex-col items-center m-10 sm:pl-1 md:pl-64 part hidden" id="alcohol">
-                <div class="section-title text-2xl font-bold mb-4 text-gray-800">Alcohol</div>
-
-                <!-- First row of cards -->
-                <div class="flex flex-wrap justify-center">
-
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
-
-                    <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 m-4">
-                        <div class="flex items-center justify-center">
-                            <img class="rounded-3xl" src="images/dish1.jpeg" alt="" />
-                        </div>
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest
-                                enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-        <!-- About Section -->
-                    <!-- About Section -->
-            <div id="about-section" class="flex section text-center md:ml-64 mr-20 hidden">
-                <div class="max-w-2xl mx-auto">
-                    <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">About Us</div>
-                    
-                    <!-- Image or Animation -->
-                    <div class="mb-8">
-                        <img src="images/image.jpg" alt="About Us Image" class="w-full h-auto rounded-lg shadow-md animate-fade-in" />
-                    </div>
-
-                    <p class="text-gray-700 mb-8">
-                        Welcome to Flavor Voyage – a culinary journey like no other. At Flavor Voyage, we believe in creating memorable dining experiences that go beyond just great food. Our passion for culinary excellence, combined with a warm and inviting atmosphere, sets us apart.
-                    </p>
-
-                    <p class="text-gray-700 mb-8">
-                        Established in [year], Flavor Voyage has been delighting diners with a diverse menu inspired by global flavors. Our chefs, each with their unique specializations, meticulously source the finest ingredients to craft dishes that not only satisfy your taste buds but also tell a story.
-                    </p>
-
-                    <p class="text-gray-700 mb-8">
-                        Our mission is simple – to provide an unparalleled culinary experience that combines creativity, quality, and a touch of adventure. From signature dishes that have become customer favorites to our commitment to using locally sourced and sustainable ingredients, every aspect of our menu reflects our dedication to excellence.
-                    </p>
-
-                    <p class="text-gray-700 mb-8">
-                        Flavor Voyage is not just a restaurant; it's a celebration of culinary artistry. Whether you're here for a casual lunch, a romantic dinner, or a joyous celebration with friends and family, we strive to make each moment special. Our restaurant is more than a place to dine; it's a destination where each dish is a passport to a world of culinary delights.
-                    </p>
-
-                    <p class="text-gray-700 mb-8">
-                        We are proud to be an active part of our community, engaging in local initiatives, supporting local businesses, and participating in events that bring people together. Our journey is made richer by the relationships we build, and we look forward to sharing our love for food and hospitality with you.
-                    </p>
-
-          
-                </div>
-            </div>
-                <!-- Reservations Section -->
-                <div id="reservations-section" class="flex section text-center md:ml-64 mr-20 hidden">
-                    <div class="max-w-2xl mx-auto">
-                        <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">Reservations</div>
-
-                        <p class="text-gray-700 mb-8">
-                            Make your dining experience with Flavor Voyage even more special by securing your reservations in advance. Whether you're planning an intimate dinner for two, a family celebration, or a gathering with friends, we're here to ensure that your time with us is seamless and enjoyable.
-                        </p>
-
-                        <!-- Reservation Form -->
-                        <form class="border rounded-md p-6 mb-8 shadow-md">
-                            <label for="reservation-date" class="block text-gray-700 text-sm font-bold mb-2">Date:</label>
-                            <input type="date" id="reservation-date" name="reservation_date" class="border rounded-md p-2 mb-4 w-full" required>
-
-                            <label for="reservation-time" class="block text-gray-700 text-sm font-bold mb-2">Time:</label>
-                            <input type="time" id="reservation-time" name="reservation_time" class="border rounded-md p-2 mb-4 w-full" required>
-
-                            <label for="party-size" class="block text-gray-700 text-sm font-bold mb-2">Number of Persons:</label>
-                            <input type="number" id="party-size" name="party_size" class="border rounded-md p-2 mb-4 w-full" min="1" required>
-
-                            <label for="phone-number" class="block text-gray-700 text-sm font-bold mb-2">Phone Number:</label>
-                            <input type="tel" id="phone-number" name="phone_number" class="border rounded-md p-2 mb-4 w-full" placeholder="Enter your phone number" required>
-
-                            <button type="submit" class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition duration-300">Make Reservation</button>
-                        </form>
-
-                        <p class="text-gray-700 mb-8">
-                            To make a reservation, simply choose your preferred date, time, and the number of persons using the form above. Our team will confirm your reservation shortly, and we look forward to hosting you for a delightful dining experience.
-                        </p>
-                    </div>
-                </div>
-               <!-- Gallery Section -->
-                <div id="gallery-section" class="flex section text-center md:ml-64 mr-20 hidden">
-                    <div class="max-w-3xl mx-auto">
-                        <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">Gallery</div>
-
-                        <!-- Image Gallery -->
-                        <div class=" flex justify-center relative overflow-hidden">
-                            <div id="image-slider" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                <!-- Add your gallery images here with appropriate Tailwind styling -->
-                                <img src="images/resturant/image1.avif" alt="Gallery Image 1" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
-                                <img src="images/resturant/image2.avif" alt="Gallery Image 2" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
-                                <img src="images/resturant/image3.avif" alt="Gallery Image 3" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
-                                <img src="images/resturant/image4.avif" alt="Gallery Image 4" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
-                                <img src="images/resturant/image5.avif" alt="Gallery Image 5" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
-                                <img src="images/resturant/image6.avif" alt="Gallery Image 6" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
-                                <img src="images/resturant/image7.avif" alt="Gallery Image 7" class="rounded-md cursor-pointer transition duration-300 transform hover:scale-105">
-                                <!-- Add more images as needed -->
-                            </div>
-
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Catering Section -->
-                <!-- Catering Section -->
-                <div id="catering-section" class="flex section text-center md:ml-64 mr-20 hidden">
-                    <div class="max-w-3xl mx-auto">
-                        <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">Catering</div>
-
-                        <p class="text-gray-700 mb-8">
-                            Elevate your events with our catering services. Whether it's a corporate gathering, wedding, or any special occasion, Flavor Voyage is here to provide a culinary experience your guests won't forget.
-                        </p>
-
-                        <!-- Catering Packages -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                            <!-- Catering Package 1 -->
-                            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 p-8 transform hover:scale-105 transition-transform duration-300">
-                                <img src="images/catering/image1.jpeg" alt="Catering Package 1" class="mb-4 rounded-md">
-                                <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Essential Package</h5>
-                                <p class="mb-6 font-normal text-gray-700 dark:text-gray-400">Perfect for small gatherings. Includes a selection of our signature dishes.</p>
-                                <button class="bg-blue-500 text-white rounded-md py-2 px-4">Learn More</button>
-                            </div>
-
-                            <!-- Catering Package 2 -->
-                            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 p-8 transform hover:scale-105 transition-transform duration-300">
-                                <img src="images/catering/image2.jpeg" alt="Catering Package 2" class="mb-4 rounded-md">
-                                <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Premium Package</h5>
-                                <p class="mb-6 font-normal text-gray-700 dark:text-gray-400">Ideal for larger events. A curated menu featuring our chef's specialties.</p>
-                                <button class="bg-blue-500 text-white rounded-md py-2 px-4">Learn More</button>
-                            </div>
-
-                            <!-- Catering Package 3 -->
-                            <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:opacity-90 p-8 transform hover:scale-105 transition-transform duration-300">
-                                <img src="images/catering/image3.jpeg" alt="Catering Package 3" class="mb-4 rounded-md">
-                                <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Customized Package</h5>
-                                <p class="mb-6 font-normal text-gray-700 dark:text-gray-400">Tailored to your specific preferences and event requirements.</p>
-                                <button class="bg-blue-500 text-white rounded-md py-2 px-4">Learn More</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Private Events Section -->
-                <div id="private-events-section" class="flex justify-center section text-center md:ml-64 mr-40 hidden">
-                    <div class="max-w-3xl mx-auto">
-                        <div class="section-title text-4xl font-bold mb-8 mt-8 text-gray-800">Private Events</div>
-
-                        <p class="text-gray-700 mb-8">
-                            Host your special moments with us! Flavor Voyage offers a unique and elegant setting for private events. Whether it's a birthday celebration, anniversary, or corporate gathering, our team is dedicated to making your event memorable.
-                        </p>
-
-                        <!-- Private Events Form -->
-                        <form class="border rounded-md p-6">
-                            <label for="event-date" class="block text-gray-700 text-sm font-bold mb-2">Event Date:</label>
-                            <input type="date" id="event-date" name="event_date" class="border rounded-md p-2 mb-4" required>
-
-                            <label for="event-time" class="block text-gray-700 text-sm font-bold mb-2">Event Time:</label>
-                            <input type="time" id="event-time" name="event_time" class="border rounded-md p-2 mb-4" required>
-
-                            <label for="event-type" class="block text-gray-700 text-sm font-bold mb-2">Event Type:</label>
-                            <select id="event-type" name="event_type" class="border rounded-md p-2 mb-4" required>
-                                <option value="birthday">Birthday</option>
-                                <option value="anniversary">Anniversary</option>
-                                <option value="corporate">Corporate Event</option>
-                                <!-- Add more options as needed -->
-                            </select>
-
-                            <label for="guest-count" class="block text-gray-700 text-sm font-bold mb-2">Number of Guests:</label>
-                            <input type="number" id="guest-count" name="guest_count" class="border rounded-md p-2 mb-4" min="1" required>
-
-                            <label for="contact-number" class="block text-gray-700 text-sm font-bold mb-2">Contact Number:</label>
-                            <input type="tel" id="contact-number" name="contact_number" class="border rounded-md p-2 mb-4" pattern="[0-9]{10}" required>
-                            <br>
-                            <button type="submit" class="bg-blue-500 text-white rounded-md py-2 px-4" onclick="">Submit Request</button>
-                        </form>
-
-                        <p class="text-gray-700 mb-8">
-                            For inquiries about hosting private events or customizing your experience, feel free to reach out to our events team. We look forward to creating unforgettable moments with you.
-                        </p>
-                    </div>
-                </div>
-                
- 
-
-    </div>
 
     
-    <!-- special scripts for integration in App Gallery - must be placed at the bottom of the HTML after your code -->
-<script>
-    // custom config for the MTW app 
-    const mtwAppConfig = {
-        border: true // app border in the MTW page                    
-    }
+        </div>
+        <script type="module" src="./scripts/index.js"></script>
 
-    ///////////////////////////////////////////////////////
-    // implement this functions in order to use private API        
-    const sendPrivateApiRequest = async () => {
-        // your code here:
-        // sendRequestToParent({ cat: 'getAssets' })
-    }        
-
-    const acceptPrivateApiResponse = async (data) => {
-        // process received data here:
-        // console.log(data)
-    }
-
-    // use this in order to send on document load
-    document.addEventListener('DOMContentLoaded', () => {
-        // your code here:
-        //sendRequestToParent({ method: 'getAssets' })
-    })
-
-</script>
-<script src="https://morethanwallet.com/appstore/index.js"></script>
-<script src="index.js" defer></script>
 </body>
 
 </html>
+
